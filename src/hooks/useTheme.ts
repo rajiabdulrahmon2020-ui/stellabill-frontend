@@ -23,7 +23,7 @@ function getStoredPreference(): ThemePreference {
 
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
+    return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'dark';
   } catch {
     return 'system';
   }
@@ -51,8 +51,8 @@ function applyTheme(theme: Theme) {
 }
 
 export function initializeTheme() {
-  const preference = getStoredPreference();
-  applyTheme(preference === 'system' ? getSystemTheme() : preference);
+  // The app UI is designed dark-first; light mode is not fully implemented, so always render dark.
+  applyTheme('dark');
 }
 
 export function useTheme() {

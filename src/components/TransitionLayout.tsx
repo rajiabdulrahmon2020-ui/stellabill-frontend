@@ -28,7 +28,8 @@ export default function TransitionLayout() {
     }
   }, [navigationType, prefersReduced]);
 
-  const { duration, easing, distance } = transitionTokens[kind];
+  const { duration, easing: rawEasing, distance } = transitionTokens[kind];
+  const easing = (({ "ease-out": "easeOut", "ease-in": "easeIn", "ease-in-out": "easeInOut", linear: "linear" }) as Record<string, string>)[rawEasing as string] ?? rawEasing;
 
   // Define animation variants based on kind
   const variants = useMemo(() => {
